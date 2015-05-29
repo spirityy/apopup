@@ -1,5 +1,4 @@
 (function(){
-	'use strict';
 
     $.fn.apopup = function(options, callback) {
 
