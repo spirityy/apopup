@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="apopup.js"></script>
+    <style>
+        .l-popup{
+            display:none;
+            border:10px solid #ddd;
+            background:#fff;
+            width:400px;
+            height:300px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" class="open-apopup">show</a>
+    
+    <div class="l-popup">
+        <i class="p-close">关闭</i>
+        弹窗
+    </div>
+
+    <script>
+        (function(){
+            $('.open-apopup').click(function(){
+                $('.l-popup').apopup({
+                    amsl:0,
+                    position:[50,100],
+                    onOpen:function(){
+                        alert('open');
+                    },
+                    onClose:function(){
+                        alert('close');
+                    },
+                    onComplete:function(){
+                        alert('complete');
+                    }
+                });
+            })
+        })()
+    </script>
+</body>
+</html>
