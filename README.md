@@ -25,9 +25,9 @@ maskColor:遮罩层颜色(default:'#000')
         
 opacity:遮罩层透明度(default:0.7)
         
-position: 弹唱位置x,y(default:['auto', 'auto'])
+position: 弹窗位置x,y(default:['auto', 'auto'])
 	
-positionStyle:弹唱定位模式(default:'fixed') 	
+positionStyle:弹窗定位模式(default:'fixed') 	
         
 zIndex:9997
 
@@ -36,7 +36,3 @@ onClose:关闭后回调函数 type:function
 onOpen:打开前回调函数 type:function
 
 onComplete:打开后回调函数 type:function
-
-
-
-
