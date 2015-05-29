@@ -32,19 +32,15 @@
             open();
         };
 
-
        	function calcPosition(){
             vPos	= o.position[1]!=='auto' ? o.position[1] : Math.max(0, ((w.height()- $popup.outerHeight(true)) / 2) - o.amsl);
 			hPos    = o.position[0]!=='auto' ? o.position[0] : (w.width() - $popup.outerWidth(true)) / 2;
-            console.info(vPos,hPos);
 		};
 
         function open(){
 			//MASK
             if (o.mask && !$('.apopup-mask').length) {
-                $('<div class="apopup-mask"></div>')
-                .css({backgroundColor: o.maskColor, position: 'fixed', top: 0, right:0, bottom:0, left: 0, opacity: 0, zIndex: o.zIndex + popups,opacity:o.opacity})
-                .appendTo(o.appendTo);
+                $('<div class="apopup-mask"></div>').css({backgroundColor: o.maskColor, position: 'fixed', top: 0, right:0, bottom:0, left: 0, opacity: 0, zIndex: o.zIndex + popups,opacity:o.opacity}).appendTo(o.appendTo);
             }
 
 			// POPUP
