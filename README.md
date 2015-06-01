@@ -1,6 +1,6 @@
 # apopup
 
-####Fast and flexible popup component use jquery
+####Fast and flexible popup component use jquery (min.js ~2k)
 
 ###Usage
 
