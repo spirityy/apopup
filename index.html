@@ -6,7 +6,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="apopup.js"></script>
     <style>
-        .l-popup{
+        .l-popup,.l-tip{
             display:none;
             border:10px solid #ddd;
             background:#fff;
@@ -17,11 +17,20 @@
 </head>
 <body>
 
-    <a href="#" class="open-apopup">show</a>
+    <div>
+        <a href="#" class="open-apopup">show popup</a>
+    </div>
+    <div>
+        <a href="#" class="open-atip">show tip</a>
+    </div>
     
     <div class="l-popup">
         <i class="p-close">关闭</i>
         弹窗
+    </div>
+
+    <div class="l-tip">
+        提示信息
     </div>
 
     <script>
@@ -31,16 +40,21 @@
                     amsl:0,
                     position:[50,100],
                     onOpen:function(){
-                        alert('open');
+                        console.info('open');
                     },
                     onClose:function(){
-                        alert('close');
+                        console.info('close');
                     },
                     onComplete:function(){
-                        alert('complete');
+                        console.info('complete');
                     }
                 });
-            })
+            });
+
+            $('.open-atip').click(function(){
+                $.atip('dsaljdlkajsld');
+            });
+
         })()
     </script>
 </body>

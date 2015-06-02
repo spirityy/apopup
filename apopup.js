@@ -45,17 +45,18 @@
 			// POPUP
             calcPosition();
             $popup.css({
-					  'left':hPos
-					, 'top':vPos
-					, 'position': o.positionStyle
-					, 'z-index': o.zIndex + popups + 1
-                    , 'display': 'block'
-                    , 'opacity': 1
-				}).each(function() {
-            		if(o.appending) {
-                		$(this).appendTo(o.appendTo);
-            		}
-        		});
+                  'left':hPos
+                , 'top':vPos
+                , 'position': o.positionStyle
+                , 'z-index': o.zIndex + popups + 1
+                , 'display': 'block'
+                , 'opacity': 1
+            }).each(function() {
+                if(o.appending) {
+                    $(this).appendTo(o.appendTo);
+                    reposition();
+                }
+            });
             bindEvents();
             triggerCall(callback);
             triggerCall(o.onComplete);
@@ -99,7 +100,7 @@
             $('.'+o.closeClass).off('click', close).data('apopup', null);
         };
 
-		function reposition(animateSpeed){
+		function reposition(){
                 calcPosition();
                 //animateSpeed = animateSpeed || o.speed;
                 $popup.each(function() {
@@ -112,8 +113,8 @@
             close();
         }
 
-        $popup.reposition = function(animateSpeed) {
-            reposition(animateSpeed);
+        $popup.reposition = function() {
+            reposition();
         };
 
         return $popup.each(function() {
@@ -124,7 +125,7 @@
 
 
     $.fn.apopup.defaults = {
-          amsl: 			50
+          amsl: 			0
         , appending: 		true
         , appendTo: 		'body'
         , animate: 		    false
@@ -144,5 +145,27 @@
         , onOpen: 			false
         , onComplete: 		false
     };
+
+    $.atip = function(text,options, callback) {
+
+        if(!text) return false;
+
+        if ($.isFunction(options)) {
+            callback 		= options;
+            options 		= null;
+        }
+
+        var o 				= $.extend({}, $.atip.defaults, options);
+
+        return $('<div class="atip">'+text+'</div>').apopup(o,callback);
+    }
+
+    $.atip.defaults = {
+		autoClose:2000,
+        mask:false,
+        onClose:function(){
+            $(this).remove();
+        }
+    }
 
 })()
