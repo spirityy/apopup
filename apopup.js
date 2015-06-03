@@ -49,14 +49,19 @@
                 , 'top':vPos
                 , 'position': o.positionStyle
                 , 'z-index': o.zIndex + popups + 1
-                , 'display': 'block'
-                , 'opacity': 1
-            }).each(function() {
+            }).addClass(o.className).each(function() {
                 if(o.appending) {
                     $(this).appendTo(o.appendTo);
                     reposition();
                 }
             });
+
+            if(o.transition === 'fade'){ 
+                $popup.fadeIn(o.speed)
+            }else{
+                $popup.show();
+            }
+
             bindEvents();
             triggerCall(callback);
             triggerCall(o.onComplete);
@@ -74,9 +79,15 @@
             // Clean up
 			clearTimeout(autoCloseObj);
 			// Close
-            $popup.hide();
-            triggerCall(o.onClose);
-			return false; // Prevent default
+            if(o.transitionClose){
+                $popup.fadeOut(o.speed,function(){
+                    triggerCall(o.onClose);
+                });
+            }else{
+                $popup.hide();
+                triggerCall(o.onClose);
+            }
+            return false; // Prevent default
         };
 
 
@@ -128,8 +139,7 @@
           amsl: 			0
         , appending: 		true
         , appendTo: 		'body'
-        , animate: 		    false
-		, speed: 			250
+        , className: 		'apopup'
 		, autoClose:	    false
         , closeClass: 		'p-close'
         , escClose: 		true
@@ -139,7 +149,9 @@
         , opacity: 			0.7
         , position: 		['auto', 'auto']
         , positionStyle: 	'fixed'
-		, transition:		'fadeIn'
+		, transition:		false
+		, transitionClose:	false
+		, speed: 			250
         , zIndex: 			9997
         , onClose: 			false
         , onOpen: 			false
@@ -157,12 +169,15 @@
 
         var o 				= $.extend({}, $.atip.defaults, options);
 
-        return $('<div class="atip">'+text+'</div>').apopup(o,callback);
+        return $('<div>'+text+'</div>').apopup(o,callback);
     }
 
     $.atip.defaults = {
 		autoClose:2000,
         mask:false,
+        transition:'fade',
+        transitionClose:true,
+        className:'atip',
         onClose:function(){
             $(this).remove();
         }

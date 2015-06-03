@@ -2,12 +2,18 @@
 
 ####Fast and flexible popup component use jquery (min.js ~2k)
 
-###Usage
+### Usage
 
+#####apopup
 ```
 $('.popup').apopup(function(){
       options
 },callback);
+```
+
+#####atip
+```
+$.atip('提示文字',{options},callback);
 ```
 
 ###Options
@@ -17,6 +23,8 @@ amsl:垂直居中后距离中线的距离(default:0)
 appending:是否插入弹窗(default:true)
 
 appendTo:插入节点(default:'body')
+
+className:class名称(default:'apopup')
 
 autoClose:是否自动关闭(default:false)
 
