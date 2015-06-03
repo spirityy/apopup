@@ -12,7 +12,6 @@
         var $popup 			= this
           , d 				= $(document)
           , w 				= $(window)
-		  , popups			= 0
 		  , vPos
           , hPos
 		  , height
@@ -25,7 +24,6 @@
 
       function init() {
             triggerCall(o.onOpen);
-			popups = 1,
             height = $popup.outerHeight(true),
             width = $popup.outerWidth(true);
             open();
@@ -39,7 +37,7 @@
         function open(){
 			//MASK
             if (o.mask && !$('.apopup-mask').length) {
-                $('<div class="apopup-mask"></div>').css({backgroundColor: o.maskColor, position: 'fixed', top: 0, right:0, bottom:0, left: 0, opacity: 0, zIndex: o.zIndex + popups,opacity:o.opacity}).appendTo(o.appendTo);
+                $('<div class="apopup-mask"></div>').css({backgroundColor: o.maskColor, position: 'fixed', top: 0, right:0, bottom:0, left: 0, opacity: 0, zIndex: o.zIndex,opacity:o.opacity}).appendTo(o.appendTo);
             }
 
 			// POPUP
@@ -48,7 +46,7 @@
                   'left':hPos
                 , 'top':vPos
                 , 'position': o.positionStyle
-                , 'z-index': o.zIndex + popups + 1
+                , 'z-index': o.zIndex + 1
             }).addClass(o.className).each(function() {
                 if(o.appending) {
                     $(this).appendTo(o.appendTo);
