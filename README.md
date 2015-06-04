@@ -46,6 +46,12 @@ positionStyle:弹窗定位模式(default:'fixed')
 
 zIndex:9997
 
+transition:弹窗动画(default:false ['fade'])
+
+transitionClose:是否开启动画关闭(default:false)
+
+speed:动画速度(default:250ms)
+
 onClose:关闭后回调函数 type:function
 
 onOpen:打开前回调函数 type:function
