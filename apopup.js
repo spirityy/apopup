@@ -171,6 +171,7 @@
     }
 
     $.atip.defaults = {
+        amsl:150,
 		autoClose:2000,
         mask:false,
         transition:'fade',
