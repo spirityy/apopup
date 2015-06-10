@@ -22,16 +22,28 @@
 			$.isFunction(func) && func.call($popup, arg);
       }
 
-      function init() {
-            triggerCall(o.onOpen);
+      function getsize(){
             height = $popup.outerHeight(true),
             width = $popup.outerWidth(true);
+            //calc new element size
+            if(height === 0 || width ===0){
+                var temp = $popup.clone().css({ position: 'absolute', visibility: 'hidden', display: 'block' }).addClass('temp-popup').addClass(o.className).appendTo('body');
+                height = temp.outerHeight(true),
+                width = temp.outerWidth(true);
+                $('.temp-popup').remove();
+            }
+      }
+
+      function init() {
+            triggerCall(o.onOpen);
+            getsize();
             open();
         };
 
        	function calcPosition(){
-            vPos	= o.position[1]!=='auto' ? o.position[1] : Math.max(0, ((w.height()- $popup.outerHeight(true)) / 2) - o.amsl);
-			hPos    = o.position[0]!=='auto' ? o.position[0] : (w.width() - $popup.outerWidth(true)) / 2;
+            getsize();
+            vPos	= o.position[1]!=='auto' ? o.position[1] : Math.max(0, ((w.height()- height) / 2) - o.amsl);
+            hPos    = o.position[0]!=='auto' ? o.position[0] : (w.width() - width) / 2;
 		};
 
         function open(){
@@ -50,7 +62,6 @@
             }).addClass(o.className).each(function() {
                 if(o.appending) {
                     $(this).appendTo(o.appendTo);
-                    reposition();
                 }
             });
 
@@ -110,11 +121,8 @@
         };
 
 		function reposition(){
-                calcPosition();
-                //animateSpeed = animateSpeed || o.speed;
-                $popup.each(function() {
-                    $(this).css({ 'left': hPos, 'top': vPos });
-                });
+            calcPosition();
+            $popup.css({ 'left': hPos, 'top': vPos });
 		};
 
         //PUBLIC

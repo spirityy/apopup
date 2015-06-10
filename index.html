@@ -24,7 +24,6 @@
             background:rgba(0,0,0,.7);
             font-size:15px;
             text-align:center;
-            word-wrap:break-word;
         }
     </style>
 </head>
@@ -61,7 +60,7 @@
             });
 
             $('.open-atip').click(function(){
-                $.atip('这里配置提示信息!');
+                $.atip('通过对话框发送消息即可直接联系客服这里配置提示信息!',{autoClose:false});
             });
 
         })()
