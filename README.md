@@ -6,7 +6,7 @@
 
 #####apopup
 ```
-$('.popup').apopup(function(){
+var apopup = $('.popup').apopup(function(){
       options
 },callback);
 ```
@@ -57,3 +57,14 @@ onOpen:打开前回调函数 type:function
 onComplete:打开后回调函数 type:function
 
 zIndex:9997
+
+###Public Method
+
+####关闭弹窗
+```
+apopup.close();
+```
+####重新定位
+```
+apopup.reposition();
+```
