@@ -14,6 +14,11 @@ var apopup = $('.popup').apopup(function(){
 #####atip
 ```
 $.atip('提示文字',{options},callback);
+
+$.atip.success('成功提示文字',{options},callback);
+
+$.atip.error('失败提示文字',{options},callback);
+
 ```
 
 ###Options
@@ -29,6 +34,8 @@ className:class名称(default:'apopup')
 autoClose:是否自动关闭(default:false)
 
 closeClass: 关闭节点class(default:'p-close')
+
+closeRemove:是否在关闭时删除节点(default:false)
 
 escClose: 是否支持esc键关闭(default:true)
 
