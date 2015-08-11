@@ -50,7 +50,7 @@
         function open(){
           if (o.mask && !$('.apopup-mask').length) {
               $('<div class="apopup-mask"></div>').css({backgroundColor: o.maskColor, position: 'fixed', top: 0, right:0, bottom:0, left: 0, zIndex: o.zIndex,opacity:o.opacity||0}).appendTo(o.appendTo);
-        }
+          }
 
           calcPosition();
           $popup.css({
@@ -58,25 +58,28 @@
             'top':vPos ,
             'position': o.positionStyle ,
             'z-index': o.zIndex + 1
-          }).addClass(o.className).each(function() {
+            }).addClass(o.className).each(function() {
               if(o.appending) {
                   $(this).appendTo(o.appendTo);
               }
-          });
+            });
 
             if(o.transition === 'fade'){
                 $popup.fadeIn(o.speed);
+            }else if(o.csstransition){
+              $popup.show().addClass(o.csstransitionclass).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+                $popup.removeClass(o.csstransitionclass);
+              });
             }else{
                 $popup.show();
             }
-
             bindEvents();
             triggerCall(callback);
             triggerCall(o.onComplete);
             if(o.autoClose){
                 autoCloseObj = setTimeout(close, o.autoClose);
             }
-  		    }
+        }
 
 
         function close() {
@@ -90,12 +93,21 @@
             if(o.transitionClose){
                 $popup.fadeOut(o.speed,function(){
                     triggerCall(o.onClose);
+                    if(o.closeRemove) $popup.remove();
+                });
+            }else if(o.csstransition){
+                $popup.addClass(o.csstransitioncloseclass).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+                    if ($('.apopup-mask')) $('.apopup-mask').remove();
+                    $popup.removeClass(o.csstransitioncloseclass);
+                    $popup.hide();
+                    triggerCall(o.onClose);
+                    if(o.closeRemove) $popup.remove();
                 });
             }else{
                 $popup.hide();
                 triggerCall(o.onClose);
+                if(o.closeRemove) $popup.remove();
             }
-            if(o.closeRemove) $popup.remove();
             return false; // Prevent default
         }
 
@@ -154,6 +166,9 @@
         opacity:0.6,
         position:['auto', 'auto'],
         positionStyle:'fixed',
+        csstransition:false,
+        csstransitionclass:'zoom-in',
+        csstransitioncloseclass:'zoom-out',
 		    transition:false,
 		    transitionClose:false,
 		    speed:250,
@@ -180,7 +195,7 @@
 
     $.atip.defaults = {
         position:['auto', 60],
-		    autoClose:1000,
+        autoClose:1000,
         mask:false,
         transition:'fade',
         transitionClose:true,
@@ -197,3 +212,4 @@
     };
 
 })();
+
