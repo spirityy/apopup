@@ -79,7 +79,7 @@
             if(o.autoClose){
                 autoCloseObj = setTimeout(close, o.autoClose);
             }
-        }
+  		    }
 
 
         function close() {
@@ -95,7 +95,7 @@
                     triggerCall(o.onClose);
                     if(o.closeRemove) $popup.remove();
                 });
-            }else if(o.csstransition){
+            }else if(o.csstransitionClose){
                 $popup.addClass(o.csstransitioncloseclass).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
                     if ($('.apopup-mask')) $('.apopup-mask').remove();
                     $popup.removeClass(o.csstransitioncloseclass);
@@ -166,7 +166,8 @@
         opacity:0.6,
         position:['auto', 'auto'],
         positionStyle:'fixed',
-        csstransition:false,
+        csstransition:true,
+        csstransitionClose:false,
         csstransitionclass:'zoom-in',
         csstransitioncloseclass:'zoom-out',
 		    transition:false,
@@ -195,10 +196,12 @@
 
     $.atip.defaults = {
         position:['auto', 60],
-        autoClose:1000,
+		    autoClose:1000,
         mask:false,
-        transition:'fade',
-        transitionClose:true,
+        csstransition:true,
+        csstransitionClose:true,
+        csstransitionclass:'move-in',
+        csstransitioncloseclass:'move-out',
         className:'atip',
         closeRemove:true
     };
@@ -212,4 +215,3 @@
     };
 
 })();
-
